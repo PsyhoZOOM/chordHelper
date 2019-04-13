@@ -9,7 +9,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
@@ -27,11 +30,21 @@ public class ScalesWin implements Initializable {
   public VBox vb_interval_V;
   public VBox vb_interval_VI;
   public VBox vb_interval_VII;
+  public Button btest;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    cmbKey.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Keys>() {
+
+    btest.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        setScale(cmbScale.getValue());
+      }
+    });
+    cmbKey.valueProperty().addListener(new ChangeListener<Keys>() {
+
+
       @Override
       public void changed(ObservableValue<? extends Keys> observable, Keys oldValue,
           Keys newValue) {
@@ -39,11 +52,11 @@ public class ScalesWin implements Initializable {
       }
     });
 
-    cmbScale.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Scales>() {
+    cmbScale.valueProperty().addListener(new ChangeListener<Scales>() {
       @Override
       public void changed(ObservableValue<? extends Scales> observable, Scales oldValue,
           Scales newValue) {
-        setScale(newValue);
+        //setScale(newValue);
       }
     });
     
@@ -57,7 +70,6 @@ public class ScalesWin implements Initializable {
     ObservableList keysOb = FXCollections.observableArrayList(keys.getKeysArrayList());
     cmbKey.setItems(keysOb);
     cmbKey.getSelectionModel().select(0);
-    setChords();
   }
 
 
@@ -67,7 +79,6 @@ public class ScalesWin implements Initializable {
     ObservableList list = FXCollections.observableList(scales.getScalesArrayList());
     cmbScale.setItems(list);
     cmbScale.getSelectionModel().select(0);
-    setChords();
   }
 
   private void setChords() {
@@ -83,11 +94,7 @@ public class ScalesWin implements Initializable {
     scales.initScales();
 
 
-    for (Chords ch : chords.getChordsArrayList()){
-      if (scale.getPattern().contains(ch.getPattern())){
-        System.out.println(String.format("Scale: %s, Pattern %s",scale.getName(), scale.getPattern()));
-      }
-    }
+
 
 
 
@@ -96,6 +103,8 @@ public class ScalesWin implements Initializable {
 
   private void setScale(Scales newValue) {
     lScale.setText(newValue.getPattern());
+    setChords();
+
   }
 
   private void setKey(Keys newValue) {
