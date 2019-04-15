@@ -6,6 +6,7 @@ public class Keys {
   String keyName;
   String[] keys = {"A","A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
   ArrayList<Keys> keysArrayList = new ArrayList();
+  public static int KEY_LENGHT = 12; //number of notes; 12 notes starting from 0;
 
 
   public void initKeys() {

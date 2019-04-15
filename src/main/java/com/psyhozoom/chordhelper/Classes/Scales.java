@@ -44,6 +44,58 @@ public class Scales {
  }
 
 
+
+
+public Keys shiftNotes(String rootNote){
+    String notes="";
+
+  char[] chars = pattern.toCharArray();
+  Keys keys = new Keys();
+  keys.initKeys();
+
+  //shift array keys to the right position
+  int pos=0;
+
+  for (int i =0; i < keys.getKeysArrayList().size();i++){
+    if (keys.getKeysArrayList().get(i).keyName.equals(rootNote)){
+      pos=i; //position to shift array elements
+      break;
+    }
+  }
+
+
+
+  //shifting for pos times
+  int z=0;
+  ArrayList<Keys> tmpKeys = new ArrayList<>();
+  String[] keyNotes = new String[Keys.KEY_LENGHT];
+
+  for (int i=0; i<Keys.KEY_LENGHT; i++){
+    if(pos == Keys.KEY_LENGHT) {
+      pos=0;
+    }
+    keyNotes[i] = keys.getKeysArrayList().get(pos).keyName;
+    pos++;
+
+
+  }
+
+
+  Keys k = new Keys();
+  for (int i=0; i<keyNotes.length;i++){
+    Keys newKe= new Keys();
+    newKe.setKeyName(keyNotes[i]);
+    k.getKeysArrayList().add(i, newKe);
+  }
+
+  return k;
+
+
+
+
+ }
+
+
   public String getName() {
     return name;
   }

@@ -84,9 +84,9 @@ public class ScalesWin implements Initializable {
   private void setChords() {
     if (cmbScale.getSelectionModel().getSelectedIndex() ==-1) return;
     if (cmbKey.getSelectionModel().getSelectedIndex() ==-1) return;
-    Scales scale = cmbScale.getSelectionModel().getSelectedItem();
+    Scales selectedScale = cmbScale.getSelectionModel().getSelectedItem();
     Keys key = cmbKey.getSelectionModel().getSelectedItem();
-    lScale.setText(scale.getPattern());
+    lScale.setText(selectedScale.getPattern());
 
     Chords chords = new Chords();
     chords.initChords();
@@ -94,7 +94,12 @@ public class ScalesWin implements Initializable {
     scales.initScales();
 
 
-
+    //shift notes by given note
+    Keys s = selectedScale.shiftNotes(key.getKeyName());
+    for (Keys keyChords : s.getKeysArrayList()){
+      System.out.println(keyChords.getKeyName());
+      chords.getChords(keyChords.getKeyName(), selectedScale.getPattern());
+    }
 
 
 

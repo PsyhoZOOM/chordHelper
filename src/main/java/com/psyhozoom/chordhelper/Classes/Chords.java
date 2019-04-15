@@ -34,6 +34,10 @@ public class Chords {
 
   }
 
+  public void getChords(String keyName, String pattern) {
+
+
+  }
 
   public String getName() {
     return name;
@@ -67,4 +71,5 @@ public class Chords {
       ArrayList<Chords> chordsArrayList) {
     this.chordsArrayList = chordsArrayList;
   }
+
 }
