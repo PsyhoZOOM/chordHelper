@@ -34,43 +34,94 @@ public class Chords {
     chord.setPattern("100010001");
     chordsArrayList.add(chord);
 
+    chord = new Chords();
+    chord.setCode("dim");
+    chord.setName("Diminished");
+    chord.setPattern("1001001");
+    chordsArrayList.add(chord);
+
+    chord = new Chords();
+    chord.setName("Suspended second");
+    chord.setCode("sus2");
+    chord.setPattern("10100001");
+    chordsArrayList.add(chord);
+
+    chord = new Chords();
+    chord.setName("Suspended fourth");
+    chord.setCode("sus4");
+    chord.setPattern("10000101");
+    chordsArrayList.add(chord);
+
+    chord = new Chords();
+    chord.setName("Major sixth");
+    chord.setCode("maj6");
+    chord.setPattern("1000100101");
+    chordsArrayList.add(chord);
+
+    chord = new Chords();
+    chord.setName("Minor sixth");
+    chord.setCode("min6");
+    chord.setPattern("1001000101");
+    chordsArrayList.add(chord);
+
+
+    chord = new Chords();
+    chord.setName("Seventh");
+    chord.setCode("7");
+    chord.setPattern("10001001001");
+    chordsArrayList.add(chord);
+
+    chord = new Chords();
+    chord.setName("Major seventh");
+    chord.setCode("maj7");
+    chord.setPattern("100010010001");
+    chordsArrayList.add(chord);
+
   }
 
   //pat        101011010101
   //chord AMaj 10001001
   //chord Amin 10010001
 
-  public Chords getChords(String keyName, Scales pattern,
-      ArrayList<Keys> keysArrayList) {
+  public static ArrayList<String> getChordNotesOfScale(String note, String pattern){
     Chords chords = new Chords();
-    chords.setKey(keyName);
+    chords.initChords();
+    Keys keys = new Keys();
+    keys.initKeys();
+    ArrayList<String> notesOfScale = new ArrayList<>();
 
-    String notes = "";
+    ArrayList<String> notes = Keys.shiftKeys(note, Keys.getPosition(note));
 
-    for (int i=0; i< chordsArrayList.size();i++){
-      Chords chCheck = chordsArrayList.get(i);
-      String patCheck = chCheck.getPattern();
+    char[] pat = pattern.toCharArray();
 
-      char[] scalePatter = patCheck.toCharArray();
-
-      for (int z=0; z<scalePatter.length;z++){
-        if (patCheck.toCharArray()[z] == '1' && pattern.getPattern().toCharArray()[z] != '1')
-          break;
-
-        if (patCheck.toCharArray()[z] =='1' && pattern.getPattern().toCharArray()[z] =='1'){
-          Chords chordFiting=new Chords();
-          chordFiting.setKey(keyName);
-          chords.getChordsArrayList().add(chordFiting);
-          notes = notes+keysArrayList.get(z);
-        }
-      }
-
+    for (int i=0; i < pat.length; i++){
+      if (pat[i]=='1')
+        notesOfScale.add(notes.get(i));
     }
 
-    System.out.println(notes);
 
-    return chords;
+    return notesOfScale;
   }
+
+
+  public static ArrayList<Chords> getChordsOfNotePatter(String note, String pattern){
+    Chords chords = new Chords();
+    chords.initChords();
+    ArrayList<Chords> chordsArrayList = new ArrayList<>();
+
+    char[] patChars = pattern.toCharArray();
+
+    for (Chords cord : chords.getChordsArrayList()){
+      char[] chars = cord.getCode().toCharArray();
+      for (int i=0; i < chars.length; i++){
+        if (chars[i] == '1' && patChars[i] !=1) continue;
+      }
+      chordsArrayList.add(cord);
+    }
+
+    return chordsArrayList;
+  }
+
 
 
   public String getKey() {

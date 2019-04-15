@@ -5,6 +5,7 @@ import com.psyhozoom.chordhelper.Classes.Keys;
 import com.psyhozoom.chordhelper.Classes.Scales;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.layout.VBox;
+import javafx.scene.transform.Scale;
 
 public class ScalesWin implements Initializable {
 
@@ -32,6 +34,8 @@ public class ScalesWin implements Initializable {
   public VBox vb_interval_VI;
   public VBox vb_interval_VII;
   public Button btest;
+  public Label lScaleNote;
+  public Label lScaleChordNotes;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -82,6 +86,7 @@ public class ScalesWin implements Initializable {
   }
 
   private void setChords() {
+    lScaleNote.setText("");
     if (cmbScale.getSelectionModel().getSelectedIndex() == -1)
       return;
     if (cmbKey.getSelectionModel().getSelectedIndex() == -1)
@@ -96,11 +101,12 @@ public class ScalesWin implements Initializable {
     scales.initScales();
 
 
-    //for each 12 notes - show buttons with chords and corresponding scales;
-    for (int i = 0; i <12; i++){
+    //getAll chords of given scale
+    ArrayList<Chords> allChords = Scales.getAllChords(key.getKeyName(), selectedScale.getPattern());
 
+    for (Chords ch : allChords){
+      System.out.println(ch.getName());
     }
-
 
   }
 

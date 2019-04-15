@@ -1,6 +1,9 @@
 package com.psyhozoom.chordhelper.Classes;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import javafx.scene.transform.Scale;
 
 public class Scales {
  String name;
@@ -62,6 +65,40 @@ public class Scales {
 
     return patterLlist;
  }
+
+
+
+ public static ArrayList<Chords> getAllChords(String note, String pattern){
+    Keys keys = new Keys();
+    keys.initKeys();
+    Chords chords = new Chords();
+    chords.initChords();
+    Scales scales = new Scales();
+    scales.initScales();
+
+
+
+    //note is key, pattern is scale
+   //find all notes in scale
+   ArrayList<String> notesOfScale = Keys.getNotesOfScale(note, pattern);
+
+   //print all notes in scale
+   for (String notes : notesOfScale) {
+     System.out.println(notes);
+   }
+
+
+   //for each notes in scale print corresponding chords
+   for (String notes : notesOfScale){
+     ArrayList<String> chordNotesOfScale = Chords.getChordNotesOfScale(notes, pattern);
+   }
+
+
+
+
+   return null;
+
+  }
 
 
 
