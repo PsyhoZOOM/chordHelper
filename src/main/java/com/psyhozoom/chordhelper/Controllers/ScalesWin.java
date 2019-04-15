@@ -4,6 +4,7 @@ import com.psyhozoom.chordhelper.Classes.Chords;
 import com.psyhozoom.chordhelper.Classes.Keys;
 import com.psyhozoom.chordhelper.Classes.Scales;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -95,9 +96,13 @@ public class ScalesWin implements Initializable {
     scales.initScales();
 
     //shift notes by given note
-    String s = Keys.shiftKeys(key.getKeyName());
+    ArrayList<String> s = Keys.shiftKeys(key.getKeyName());
 
-      System.out.println(s);
+      System.out.println(s );
+
+      for (int i=0;i<12;i++){
+        String s1 = Scales.shiftScale(selectedScale.getPattern(), i);
+      }
   }
 
 

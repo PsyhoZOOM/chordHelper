@@ -18,8 +18,8 @@ public class Keys {
   }
 
 
-  public static String shiftKeys(String rootNote){
-    String notes= "";
+  public static ArrayList<String> shiftKeys(String rootNote){
+    ArrayList<String> notes = new ArrayList<>();
 
     Keys keys = new Keys();
     keys.initKeys();
@@ -47,7 +47,7 @@ public class Keys {
     }
 
     for (int i=0; i<keyNotes.length;i++){
-      notes+=keyNotes[i];
+      notes.add(keyNotes[i]);
     }
 
     return notes;

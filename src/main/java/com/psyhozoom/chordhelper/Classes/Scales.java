@@ -44,13 +44,25 @@ public class Scales {
  }
 
 
- public static String shiftScale(String scalePatter){
-    String scale="";
+ public static String shiftScale(String scalePattern, int position){
+    char[] scaletmp = new char[scalePattern.length()];
+    char[] scaleCh = scalePattern.toCharArray();
+
+    for (int i =0; i < scalePattern.length(); i++){
+      if (position== scalePattern.length())
+        position=0;
+
+      scaletmp[i] = scaleCh[position];
+      position++;
+
+
+    }
+
+   System.out.println(scaletmp);
 
 
 
-
-    return scale;
+    return scaletmp.toString();
  }
 
 

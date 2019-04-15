@@ -70,11 +70,6 @@ public class Chords {
     System.out.println(notes);
 
     return chords;
-
-
-
-
-
   }
 
 
