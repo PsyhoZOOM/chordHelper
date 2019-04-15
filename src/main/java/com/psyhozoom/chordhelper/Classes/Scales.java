@@ -44,7 +44,8 @@ public class Scales {
  }
 
 
- public static String shiftScale(String scalePattern, int position){
+ public static ArrayList<String> shiftScale(String scalePattern, int position){
+    ArrayList<String> patterLlist = new ArrayList<>();
     char[] scaletmp = new char[scalePattern.length()];
     char[] scaleCh = scalePattern.toCharArray();
 
@@ -53,16 +54,13 @@ public class Scales {
         position=0;
 
       scaletmp[i] = scaleCh[position];
+      patterLlist.add(String.valueOf(scaleCh[position]));
       position++;
 
 
     }
 
-   System.out.println(scaletmp);
-
-
-
-    return scaletmp.toString();
+    return patterLlist;
  }
 
 

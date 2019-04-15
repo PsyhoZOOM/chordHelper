@@ -95,14 +95,13 @@ public class ScalesWin implements Initializable {
     Scales scales = new Scales();
     scales.initScales();
 
-    //shift notes by given note
-    ArrayList<String> s = Keys.shiftKeys(key.getKeyName());
 
-      System.out.println(s );
+    //for each 12 notes - show buttons with chords and corresponding scales;
+    for (int i = 0; i <12; i++){
 
-      for (int i=0;i<12;i++){
-        String s1 = Scales.shiftScale(selectedScale.getPattern(), i);
-      }
+    }
+
+
   }
 
 
