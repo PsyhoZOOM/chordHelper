@@ -6,6 +6,8 @@ public class Chords {
   String name;
   String code;
   String pattern;
+  String key;
+  String notes;
   ArrayList<Chords> chordsArrayList = new ArrayList<>();
 
 
@@ -34,9 +36,54 @@ public class Chords {
 
   }
 
-  public void getChords(String keyName, String pattern) {
+  //pat        101011010101
+  //chord AMaj 10001001
+  //chord Amin 10010001
+
+  public Chords getChords(String keyName, Scales pattern,
+      ArrayList<Keys> keysArrayList) {
+    Chords chords = new Chords();
+    chords.setKey(keyName);
+
+    String notes = "";
+
+    for (int i=0; i< chordsArrayList.size();i++){
+      Chords chCheck = chordsArrayList.get(i);
+      String patCheck = chCheck.getPattern();
+
+      char[] scalePatter = patCheck.toCharArray();
+
+      for (int z=0; z<scalePatter.length;z++){
+        if (patCheck.toCharArray()[z] == '1' && pattern.getPattern().toCharArray()[z] != '1')
+          break;
+
+        if (patCheck.toCharArray()[z] =='1' && pattern.getPattern().toCharArray()[z] =='1'){
+          Chords chordFiting=new Chords();
+          chordFiting.setKey(keyName);
+          chords.getChordsArrayList().add(chordFiting);
+          notes = notes+keysArrayList.get(z);
+        }
+      }
+
+    }
+
+    System.out.println(notes);
+
+    return chords;
 
 
+
+
+
+  }
+
+
+  public String getKey() {
+    return key;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
   }
 
   public String getName() {
@@ -72,4 +119,11 @@ public class Chords {
     this.chordsArrayList = chordsArrayList;
   }
 
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
 }

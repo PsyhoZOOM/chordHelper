@@ -18,6 +18,42 @@ public class Keys {
   }
 
 
+  public static String shiftKeys(String rootNote){
+    String notes= "";
+
+    Keys keys = new Keys();
+    keys.initKeys();
+
+    //shift array keys to the right position
+    int pos=0;
+
+    for (int i =0; i < keys.getKeysArrayList().size();i++){
+      if (keys.getKeysArrayList().get(i).keyName.equals(rootNote)){
+        pos=i; //position to shift array elements
+        break;
+      }
+    }
+
+    //shifting for pos times
+    ArrayList<Keys> tmpKeys = new ArrayList<>();
+    String[] keyNotes = new String[Keys.KEY_LENGHT];
+
+    for (int i=0; i<Keys.KEY_LENGHT; i++){
+      if(pos == Keys.KEY_LENGHT) {
+        pos=0;
+      }
+      keyNotes[i] = keys.getKeysArrayList().get(pos).keyName;
+      pos++;
+    }
+
+    for (int i=0; i<keyNotes.length;i++){
+      notes+=keyNotes[i];
+    }
+
+    return notes;
+  }
+
+
   public String getKeyName() {
     return keyName;
   }

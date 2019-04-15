@@ -35,7 +35,6 @@ public class ScalesWin implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-
     btest.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
@@ -59,7 +58,7 @@ public class ScalesWin implements Initializable {
         //setScale(newValue);
       }
     });
-    
+
     loadKeys();
     loadScales();
   }
@@ -82,8 +81,10 @@ public class ScalesWin implements Initializable {
   }
 
   private void setChords() {
-    if (cmbScale.getSelectionModel().getSelectedIndex() ==-1) return;
-    if (cmbKey.getSelectionModel().getSelectedIndex() ==-1) return;
+    if (cmbScale.getSelectionModel().getSelectedIndex() == -1)
+      return;
+    if (cmbKey.getSelectionModel().getSelectedIndex() == -1)
+      return;
     Scales selectedScale = cmbScale.getSelectionModel().getSelectedItem();
     Keys key = cmbKey.getSelectionModel().getSelectedItem();
     lScale.setText(selectedScale.getPattern());
@@ -93,18 +94,12 @@ public class ScalesWin implements Initializable {
     Scales scales = new Scales();
     scales.initScales();
 
-
     //shift notes by given note
-    Keys s = selectedScale.shiftNotes(key.getKeyName());
-    for (Keys keyChords : s.getKeysArrayList()){
-      System.out.println(keyChords.getKeyName());
-      chords.getChords(keyChords.getKeyName(), selectedScale.getPattern());
-    }
+    String s = Keys.shiftKeys(key.getKeyName());
 
-
-
-
+      System.out.println(s);
   }
+
 
   private void setScale(Scales newValue) {
     lScale.setText(newValue.getPattern());
