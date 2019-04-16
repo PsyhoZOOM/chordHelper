@@ -9,7 +9,12 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jdk.internal.org.objectweb.asm.tree.MultiANewArrayInsnNode;
 
 public class OscJava  {
@@ -37,8 +42,9 @@ public class OscJava  {
 
   public void sendNote(ArrayList<String> send){
     for (int i=0; i<send.size(); i++) {
-      int note = noteToMidi(send.get(i));
-      Object[] arg = {new Integer(-1), new Integer(-1), note, new Integer(100)};
+      int note = noteToMidi(send.get(i)+"4");
+      System.out.println(note);
+      Object[] arg = {new Integer(-1), new Integer(-1), new Integer(note), new Integer(100)};
 
       message = new OSCMessage("/renoise/trigger/note_on", Arrays.asList(arg));
 
@@ -53,7 +59,7 @@ public class OscJava  {
   public void stopNote(ArrayList<String> send){
 
     for (int i=0; i<send.size(); i++) {
-      int note = noteToMidi(send.get(i));
+      int note = noteToMidi(send.get(i)+"4");
       Object[] arg = {new Integer(-1), new Integer(-1), new Integer(note)};
 
       message = new OSCMessage("/renoise/trigger/note_off", Arrays.asList(arg));
@@ -68,34 +74,80 @@ public class OscJava  {
 
 
 
-  private int noteToMidi(String note){
-    String sym = "";
-    int oct = 0;
-    String[][] notes = { {"C"}, {"Db", "C#"}, {"D"}, {"Eb", "D#"}, {"E"},
-        {"F"}, {"Gb", "F#"}, {"G"}, {"Ab", "G#"}, {"A"}, {"Bb", "A#"}, {"B"} };
-
-    char[] splitNote = note.toCharArray();
-
-    // If the length is two, then grab the symbol and number.
-    // Otherwise, it must be a two-char note.
-    if (splitNote.length == 2) {
-      sym += splitNote[0];
-      oct = splitNote[1];
-    } else if (splitNote.length == 3) {
-      sym += Character.toString(splitNote[0]);
-      sym += Character.toString(splitNote[1]);
-      oct = splitNote[2];
+  private int noteToMidi(String noteAndOctave){
+    System.out.println(String.format("contver %s",noteAndOctave));
+    if (!noteAndOctave
+        .matches("^(C|C#|D|D#|E|F|F#|G|G#|A|A#|B)(-1|[0-9])$")) {
+      System.out.println("note " + noteAndOctave
+          + " is not a muscial note.");
+      System.exit(1);
     }
 
-    // Find the corresponding note in the array.
-    for (int i = 0; i < notes.length; i++)
-      for (int j = 0; j < notes[i].length; j++) {
-        if (notes[i][j].equals(sym)) {
-          return Character.getNumericValue(oct) * 12 + i;
-        }
-      }
+    char note = noteAndOctave.charAt(0);
 
-    // If nothing was found, we return -1.
-    return -1;
+    int noteValue = -100;
+
+    switch (note) {
+      case 'C':
+        noteValue = 0;
+        break;
+      case 'D':
+        noteValue = 2;
+        break;
+      case 'E':
+        noteValue = 4;
+        break;
+      case 'F':
+        noteValue = 5;
+        break;
+      case 'G':
+        noteValue = 7;
+        break;
+      case 'A':
+        noteValue = 9;
+        break;
+      case 'B':
+        noteValue = 11;
+        break;
+      default:
+        System.out.println("This should never be reached.");
+        System.exit(1);
+        break;
+    }
+
+    boolean sharp = noteAndOctave.contains("#");
+
+    // if it's sharp, the note value goes up by one
+    if (sharp) {
+      //System.out.println("There is a sharp");
+      noteValue += 1;
+    }
+
+    //System.out.println("notevalue: " + noteValue);
+
+    int octaveIndex = -100;
+
+    // set the starting index for the octave
+    if (sharp)
+      octaveIndex = 2;
+    else
+      octaveIndex = 1;
+
+    //System.out.println("octaveIndex is " + octaveIndex);
+
+    int octave = -100;
+
+    try {
+      // figure out the octave
+      octave = Integer.parseInt(noteAndOctave.substring(octaveIndex));
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.exit(1);
+    }
+
+    //System.out.println("octave is " + octave);
+
+    return (octave + 1) * 12 + noteValue;
+
   }
 }
