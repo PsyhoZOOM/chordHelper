@@ -3,6 +3,7 @@ package com.psyhozoom.chordhelper.Controllers;
 import com.psyhozoom.chordhelper.Classes.Chords;
 import com.psyhozoom.chordhelper.Classes.ChordsProg;
 import com.psyhozoom.chordhelper.Classes.Keys;
+import com.psyhozoom.chordhelper.Classes.OscJava;
 import com.psyhozoom.chordhelper.Classes.Scales;
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,6 +40,9 @@ public class ScalesWin implements Initializable {
   public Label lScaleNote;
   public Label lScaleChordNotes;
   public HBox hboxChords;
+
+
+  private OscJava oscJava = new OscJava();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -121,21 +125,15 @@ public class ScalesWin implements Initializable {
         Button butChord = new Button();
         butChord.setText(chordsProg.getNoteNames()+" "+chordsProg.getChords().get(c).getCode());
         ArrayList<String> notes = chordsProg.getChords().get(c).getNotes();
-        butChord.setOnAction(new EventHandler<ActionEvent>() {
-          @Override
-          public void handle(ActionEvent event) {
-            playNotes(notes);
-          }
-        });
 
         butChord.setOnMousePressed(new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent event) {
-            playNotes(notes);
+              playNotes(notes);
           }
         });
 
-        butChord.setOnMousePressed(new EventHandler<MouseEvent>() {
+        butChord.setOnMouseReleased(new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent event) {
             stopNotes(notes);
@@ -169,9 +167,11 @@ public class ScalesWin implements Initializable {
       notePlay+=note+" ";
     }
     lScaleChordNotes.setText(notePlay);
+    oscJava.sendNote(notes);
   }
 
   private void stopNotes(ArrayList<String> notes) {
+    oscJava.stopNote(notes);
   }
 
 
