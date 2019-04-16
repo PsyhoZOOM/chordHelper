@@ -2,20 +2,13 @@ package com.psyhozoom.chordhelper.Classes;
 
 
 import com.illposed.osc.OSCMessage;
-import com.illposed.osc.OSCPort;
-import com.illposed.osc.OSCPortOut;
+import com.illposed.osc.OSCSerializeException;
+import com.illposed.osc.transport.udp.OSCPortOut;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import jdk.internal.org.objectweb.asm.tree.MultiANewArrayInsnNode;
 
 public class OscJava  {
   int port = 8000;
@@ -52,6 +45,8 @@ public class OscJava  {
         osc.send(message);
       } catch (IOException e) {
         e.printStackTrace();
+      } catch (OSCSerializeException e) {
+        e.printStackTrace();
       }
     }
   }
@@ -67,6 +62,8 @@ public class OscJava  {
       try {
         osc.send(message);
       } catch (IOException e) {
+        e.printStackTrace();
+      } catch (OSCSerializeException e) {
         e.printStackTrace();
       }
     }

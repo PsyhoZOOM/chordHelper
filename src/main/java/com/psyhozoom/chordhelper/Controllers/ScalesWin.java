@@ -117,7 +117,7 @@ public class ScalesWin implements Initializable {
     }
     lScaleNote.setText(scalenotes);
 
-    for (int i = 0; i < 7; i++){
+    for (int i = 0; i < allChords.size(); i++){
       ChordsProg chordsProg = allChords.get(i);
       VBox node = (VBox) hboxChords.getChildren().get(i);
       node.getChildren().add(new Label(chordsProg.getName()));
