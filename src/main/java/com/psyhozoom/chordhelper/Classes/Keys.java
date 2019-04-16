@@ -102,6 +102,14 @@ public class Keys {
     return 0;
   }
 
+  public static String notesToString(ArrayList<String> notes){
+    String all_notes="";
+    for (String s: notes){
+      all_notes+=s;
+    }
+    return all_notes;
+  }
+
 
 
   public String getKeyName() {

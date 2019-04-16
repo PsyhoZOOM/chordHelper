@@ -1,9 +1,11 @@
 package com.psyhozoom.chordhelper.Classes;
 
-import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javafx.scene.transform.Scale;
 
 public class Scales {
  String name;
@@ -14,37 +16,32 @@ public class Scales {
 
 
   public   void initScales(){
-    //Major
-    Scales scale = new Scales();
-    scale.setName("Major");
-    scale.setPattern("101011010101");
-    scalesArrayList.add(scale);
 
-    //Natural Minor
-    scale = new Scales();
-    scale.setName("Natural Minor");
-    scale.setPattern("1011010110100");
-    scalesArrayList.add(scale);
+    URL scales = ClassLoader.getSystemResource("scales");
 
-    //Harmonic Minor
-    scale = new Scales();
-    scale.setName("Harmonic Minor");
-    scale.setPattern("101101011001");
-    scalesArrayList.add(scale);
+    try {
+      FileReader fr = new FileReader(scales.getFile());
+      BufferedReader bfr = new BufferedReader(fr);
+      String line;
+      while ((line = bfr.readLine()) != null){
+        String[] split = line.split(",");
+        Scales sc = new Scales();
+        sc.setName(split[0].trim());
+        sc.setPattern(split[1].trim());
+        scalesArrayList.add(sc);
+      }
 
-    //Melodic Minor
-    scale = new Scales();
-    scale.setName("Melodic Minor");
-    scale.setPattern("101101010101");
-    scalesArrayList.add(scale);
+      bfr.close();
+      fr.close();
 
-    //Pentatonic Minor
-    scale = new Scales();
-    scale.setName("Pentatonic Minor");
-    scale.setPattern("101001010100");
-    scalesArrayList.add(scale);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
- }
+
+  }
 
 
  public static ArrayList<String> shiftScale(String scalePattern, int position){
@@ -68,7 +65,8 @@ public class Scales {
 
 
 
- public static ArrayList<Chords> getAllChords(String note, String pattern){
+ public static ArrayList<ChordsProg> getAllChords(String note, String pattern){
+    ArrayList<ChordsProg> chordsProgs = new ArrayList<>();
     Keys keys = new Keys();
     keys.initKeys();
     Chords chords = new Chords();
@@ -80,24 +78,75 @@ public class Scales {
 
     //note is key, pattern is scale
    //find all notes in scale
-   ArrayList<String> notesOfScale = Keys.getNotesOfScale(note, pattern);
+   ArrayList<String> notesOfScale = Keys.shiftNote(note);
+   ArrayList<String> currentNote = Keys.getNotesOfScale(note, pattern);
 
 
 
 
+   System.out.println(String.format("Scale: %s", note));
+   for (int i=0; i <notesOfScale.size(); i++) {
+
+     ArrayList<String> strings = Scales.shiftScale(pattern, i);
+     String patternNew = Scales.PatternToString(strings);
+
+     if (currentNote.contains(notesOfScale.get(i))){
+       ArrayList<String> allNotesOfScale = Keys.getNotesOfScale(notesOfScale.get(i), patternNew);
+       ArrayList<Chords> allCHords = Chords.getChordsOfNotePatter(notesOfScale.get(i), patternNew);
+
+       ChordsProg chordsProg = new ChordsProg();
+       chordsProg.setNoteNames(notesOfScale.get(i));
+       chordsProg.setScaleName(getModeName(patternNew));
+       chordsProg.setNote(allNotesOfScale);
+       chordsProg.setPattern(patternNew);
 
 
 
-   return null;
+
+       System.out.println(
+           String.format("Chords starting with:%s, pattern: %s , mode: %s, Chords: ",
+               notesOfScale.get(i),
+                   patternNew,
+               getModeName(patternNew)
+           ));
+       for(Chords ch : allCHords){
+         System.out.println(String.format("%s %s %s",notesOfScale.get(i), ch.getCode(), ch.getNotes()));
+         chordsProg.setChords(ch);
+       }
+       chordsProgs.add(chordsProg);
+     }
+   }
+
+
+   return chordsProgs;
+   }
 
 
 
+   public static String getModeName(String pattern){
+    Scales scales  = new Scales();
+    scales.initScales();
+
+    for (Scales scale : scales.getScalesArrayList()){
+      String s = scale.getPattern();
+      if (s.contains(pattern))
+        return scale.getName();
+    }
+    return "Scala nije definisana";
    }
 
 
 
 
+   public static String PatternToString(ArrayList<String> pat){
+    String pattern = "";
+    for (String s : pat){
+      pattern+=s;
+    }
 
+    return pattern;
+
+   }
 
 
 

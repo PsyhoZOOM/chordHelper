@@ -1,0 +1,20 @@
+Major,maj,10001001
+Minor,min,10010001
+Augmented,aug,100010001
+Diminished,dim,1001001
+suspended second,sus2,10100001
+suspended fourth,sus4,10000101
+sixth,maj6,1000100101
+minor sixth,min6,1001000101
+seventh,7,10001001001
+major seventh,maj7,100010010001
+minor seventh,min7,10010001001
+minor/major seventh,min/maj7,100100010001
+diminished seventh,dim7,1001001001
+half-diminished,min7b5,10010010001
+seventh diminished fifth,7b5,10001010001
+seventh augmented fifth,7#5,10001000101
+major seventh diminished fifth,maj7b5,100010100001
+major seventh augmented fifth,maj7#5,100010001001
+seventh suspended fourth,7sus4,10000101001
+seventh suspended fourth augmented fifth,7sus4#5,10000100101

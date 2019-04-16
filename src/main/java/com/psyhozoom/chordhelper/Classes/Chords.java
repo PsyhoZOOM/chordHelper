@@ -1,5 +1,10 @@
 package com.psyhozoom.chordhelper.Classes;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Chords {
@@ -7,7 +12,7 @@ public class Chords {
   String code;
   String pattern;
   String key;
-  String notes;
+  ArrayList<String> notes = new ArrayList<>();
   ArrayList<Chords> chordsArrayList = new ArrayList<>();
 
 
@@ -16,66 +21,29 @@ public class Chords {
   }
 
   private void setChords() {
-    Chords chord = new Chords();
-    chord.setName("Major");
-    chord.setCode("Maj");
-    chord.setPattern("10001001");
-    chordsArrayList.add(chord);
+    Chords chord;
 
-    chord = new Chords();
-    chord.setName("Minor");
-    chord.setCode("min");
-    chord.setPattern("10010001");
-    chordsArrayList.add(chord);
+    URL chords = ClassLoader.getSystemResource("chords");
 
-    chord = new Chords();
-    chord.setName("Augmented");
-    chord.setCode("aug");
-    chord.setPattern("100010001");
-    chordsArrayList.add(chord);
-
-    chord = new Chords();
-    chord.setCode("dim");
-    chord.setName("Diminished");
-    chord.setPattern("1001001");
-    chordsArrayList.add(chord);
-
-    chord = new Chords();
-    chord.setName("Suspended second");
-    chord.setCode("sus2");
-    chord.setPattern("10100001");
-    chordsArrayList.add(chord);
-
-    chord = new Chords();
-    chord.setName("Suspended fourth");
-    chord.setCode("sus4");
-    chord.setPattern("10000101");
-    chordsArrayList.add(chord);
-
-    chord = new Chords();
-    chord.setName("Major sixth");
-    chord.setCode("maj6");
-    chord.setPattern("1000100101");
-    chordsArrayList.add(chord);
-
-    chord = new Chords();
-    chord.setName("Minor sixth");
-    chord.setCode("min6");
-    chord.setPattern("1001000101");
-    chordsArrayList.add(chord);
+    try {
+      FileReader fr = new FileReader(chords.getFile());
+      BufferedReader br = new BufferedReader(fr);
+      String line ;
+      while ((line = br.readLine()) != null){
+        String[] split = line.split(",");
+        chord = new Chords();
+        chord.setName(split[0].trim());
+        chord.setCode(split[1].trim());
+        chord.setPattern(split[2].trim());
+        chordsArrayList.add(chord);
 
 
-    chord = new Chords();
-    chord.setName("Seventh");
-    chord.setCode("7");
-    chord.setPattern("10001001001");
-    chordsArrayList.add(chord);
-
-    chord = new Chords();
-    chord.setName("Major seventh");
-    chord.setCode("maj7");
-    chord.setPattern("100010010001");
-    chordsArrayList.add(chord);
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
   }
 
@@ -107,21 +75,43 @@ public class Chords {
   public static ArrayList<Chords> getChordsOfNotePatter(String note, String pattern){
     Chords chords = new Chords();
     chords.initChords();
+
     ArrayList<Chords> chordsArrayList = new ArrayList<>();
+    ArrayList<String> notes = Keys.shiftNote(note);
 
     char[] patChars = pattern.toCharArray();
 
-    for (Chords cord : chords.getChordsArrayList()){
-      char[] chars = cord.getCode().toCharArray();
-      for (int i=0; i < chars.length; i++){
-        if (chars[i] == '1' && patChars[i] !=1) continue;
+    for (Chords ch : chords.getChordsArrayList()){
+      boolean match = false;
+      char[]  chordChars = ch.getPattern().toCharArray();
+      for (int i =0; i < chordChars.length; i++){
+        if (chordChars[i] == '1' && patChars[i] != '1') {
+          match = false;
+          break;
+        }
+        match=true;
       }
-      chordsArrayList.add(cord);
+      if (match){
+        ch.setNotes(getNotesOfPatterNote(note, ch.getPattern()));
+       chordsArrayList.add(ch);
+      }
     }
 
     return chordsArrayList;
   }
 
+  private static ArrayList<String> getNotesOfPatterNote(String note, String pattern) {
+    ArrayList<String> strings = Keys.shiftNote(note);
+    ArrayList<String> notes = new ArrayList<>();
+
+    char[] patChars = pattern.toCharArray();
+    for (int i=0; i<patChars.length; i++){
+      if (patChars[i] == '1')
+        notes.add(strings.get(i));
+    }
+
+    return notes;
+  }
 
 
   public String getKey() {
@@ -165,11 +155,11 @@ public class Chords {
     this.chordsArrayList = chordsArrayList;
   }
 
-  public String getNotes() {
+  public ArrayList<String> getNotes() {
     return notes;
   }
 
-  public void setNotes(String notes) {
+  public void setNotes(ArrayList<String> notes) {
     this.notes = notes;
   }
 }

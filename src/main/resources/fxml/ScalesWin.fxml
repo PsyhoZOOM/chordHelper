@@ -83,7 +83,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </HBox>
-                  <HBox VBox.vgrow="ALWAYS">
+                  <HBox fx:id="hboxChords" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox fx:id="vb_interval_I" alignment="TOP_CENTER" prefHeight="20.0" HBox.hgrow="ALWAYS">
                            <children>

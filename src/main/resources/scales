@@ -1,0 +1,46 @@
+Major,101011010101
+Natural Minor,101101011010 
+Harmonic Minor,101101011001 
+Melodic Minor,101101010101 
+Pentatonic Major,101001010100 
+Pentatonic Minor,100101010010 
+Pentatonic Blues,100101110010 
+Pentatonic Neutral,101001010010 
+Ionian,101011010101 
+Aeolian,101101011010
+Dorian,101101010110
+Mixolydian,101011010110
+Phrygian,110101011010
+Lydian,101010110101
+Locrian,110101101010
+Dim half,110110110110
+Dim whole,101101101101
+Whole,101010101010
+Augmented,100110011001
+Roumanian Minor,101100110110
+Spanish Gypsy,110011011010
+Blues,100101110010
+Diatonic,101010010100
+Double Harmonic,110011011001
+Eight Tone Spanish,110111101010
+Enigmatic,110010101011
+Leading Whole Tone,101010101110
+Lydian Augmented,101010101101
+Neoploitan Major,110101010101
+Neopolitan Minor,110101011010
+Pelog,110100100011
+Prometheus,101010100110
+Prometheus Neopolitan,110010100110
+Six Tone Symmetrical,110011001100
+Super Locrian,110110101010
+Lydian Minor,101010111010
+Lydian Diminished,101100111010
+Nine Tone Scale,101110111101
+Auxiliary Diminished,101101101101
+Auxiliary Augmented,101010101010
+Auxiliary Diminished Blues,110110110110
+Major Locrian,101011101010
+Overtone,101010110110
+Diminished Whole Tone,110110101010
+Pure Minor,101101011010
+Dominant 7th,101001010110
