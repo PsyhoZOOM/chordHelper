@@ -17,10 +17,9 @@ public class Scales {
 
   public   void initScales(){
 
-    URL scales = ClassLoader.getSystemResource("scales");
 
     try {
-      FileReader fr = new FileReader(scales.getFile());
+      FileReader fr = new FileReader("scales");
       BufferedReader bfr = new BufferedReader(fr);
       String line;
       while ((line = bfr.readLine()) != null){

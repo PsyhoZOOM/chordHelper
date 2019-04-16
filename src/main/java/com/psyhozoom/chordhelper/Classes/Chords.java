@@ -23,10 +23,9 @@ public class Chords {
   private void setChords() {
     Chords chord;
 
-    URL chords = ClassLoader.getSystemResource("chords");
 
     try {
-      FileReader fr = new FileReader(chords.getFile());
+      FileReader fr = new FileReader("chords");
       BufferedReader br = new BufferedReader(fr);
       String line ;
       while ((line = br.readLine()) != null){

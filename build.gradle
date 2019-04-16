@@ -16,3 +16,19 @@ dependencies {
 
 
 }
+
+sourceSets {
+    main.java.srcDir "src/main/java"
+    main.resources.srcDir "src/main/resources"
+}
+
+
+jar {
+    manifest {
+        attributes (
+            'Class-Path': configurations.compile.collect {it.getName()}.join(' '),
+            'Main-Class': 'com.psyhozoom.chordhelper.Main'
+            )
+        }
+    from configurations.compile.collect { entry -> zipTree(entry)}
+}
