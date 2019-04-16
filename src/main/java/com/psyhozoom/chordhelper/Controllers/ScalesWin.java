@@ -104,9 +104,6 @@ public class ScalesWin implements Initializable {
     //getAll chords of given scale
     ArrayList<Chords> allChords = Scales.getAllChords(key.getKeyName(), selectedScale.getPattern());
 
-    for (Chords ch : allChords){
-      System.out.println(ch.getName());
-    }
 
   }
 

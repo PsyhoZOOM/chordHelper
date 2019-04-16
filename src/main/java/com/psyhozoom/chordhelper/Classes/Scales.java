@@ -82,23 +82,23 @@ public class Scales {
    //find all notes in scale
    ArrayList<String> notesOfScale = Keys.getNotesOfScale(note, pattern);
 
-   //print all notes in scale
-   for (String notes : notesOfScale) {
-     System.out.println(notes);
-   }
 
 
-   //for each notes in scale print corresponding chords
-   for (String notes : notesOfScale){
-     ArrayList<String> chordNotesOfScale = Chords.getChordNotesOfScale(notes, pattern);
-   }
 
 
 
 
    return null;
 
-  }
+
+
+   }
+
+
+
+
+
+
 
 
 
