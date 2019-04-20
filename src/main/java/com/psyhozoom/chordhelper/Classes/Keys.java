@@ -8,6 +8,13 @@ public class Keys {
   ArrayList<Keys> keysArrayList = new ArrayList();
   public static int KEY_LENGHT = 12; //number of notes; 12 notes starting from 0;
 
+  public static String getNegativeKey(ArrayList<String> chordNotesOfScale) {
+    String note = "";
+    note = chordNotesOfScale.get(4);
+    System.out.println(note);
+    return note;
+  }
+
 
   public void initKeys() {
     for (int i =0;i<keys.length; i++){

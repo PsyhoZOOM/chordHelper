@@ -40,6 +40,10 @@ public class ScalesWin implements Initializable {
   public Label lScaleNote;
   public Label lScaleChordNotes;
   public HBox hboxChords;
+  public Label lScaleN;
+  public Label lScaleNoteN;
+  public Label lScaleChordNotesN;
+  public HBox hboxChords_N;
 
 
   private OscJava oscJava = new OscJava();
@@ -147,6 +151,20 @@ public class ScalesWin implements Initializable {
 
       }
     }
+
+    //negative harmonics
+    String negative_key = Keys.getNegativeKey(Chords.getChordNotesOfScale(key.getKeyName(), selectedScale.getPattern()));
+    String negative_patern = Scales.reverseScale(selectedScale.getPattern());
+    lScaleN.setText(negative_patern);
+
+    ArrayList<String> chordNotesOfScale = Chords
+        .getChordNotesOfScale(negative_key, negative_patern);
+    String notes_Scale_N="";
+    for (String not : chordNotesOfScale){
+      notes_Scale_N+=not+" ";
+    }
+    lScaleNoteN.setText(notes_Scale_N);
+
 
 
   }

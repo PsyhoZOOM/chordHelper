@@ -2,18 +2,20 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psyhozoom.chordhelper.Controllers.ScalesWin">
+<AnchorPane stylesheets="@../css/Main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psyhozoom.chordhelper.Controllers.ScalesWin">
    <children>
       <VBox layoutX="228.0" layoutY="123.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -47,13 +49,14 @@
                         <Label text="Scale:" />
                         <ComboBox fx:id="cmbScale" HBox.hgrow="ALWAYS" />
                         <Separator orientation="VERTICAL" />
-                        <Button fx:id="btest" mnemonicParsing="false" text="Button" />
+                        <Button fx:id="btest" mnemonicParsing="false" text="Show" />
+                        <CheckBox mnemonicParsing="false" text="also send to OSC host:" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" spacing="5.0" VBox.vgrow="NEVER">
+                  <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
                      <children>
                         <Label text="INTERVALS:" />
                         <Label fx:id="lScale" />
@@ -65,7 +68,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="46.0" spacing="5.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="46.0" spacing="5.0">
                      <children>
                         <Label text="SCALE:" />
                         <Label fx:id="lScaleNote" />
@@ -74,7 +77,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="72.0" spacing="5.0">
+                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="72.0" spacing="5.0">
                      <children>
                         <Label text="CHORD NOTES:" />
                         <Label fx:id="lScaleChordNotes" />
@@ -83,47 +86,330 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </HBox>
-                  <HBox fx:id="hboxChords" VBox.vgrow="ALWAYS">
+                  <HBox fx:id="hboxChords1">
                      <children>
-                        <VBox fx:id="vb_interval_I" alignment="TOP_CENTER" prefHeight="20.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="I" />
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                         </VBox>
-                        <VBox fx:id="vb_interval_II" alignment="TOP_CENTER" prefHeight="20.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="II" />
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                         </VBox>
-                        <VBox fx:id="vb_interval_III" alignment="TOP_CENTER" prefHeight="20.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="III" />
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                         </VBox>
-                        <VBox fx:id="vb_interval_IV" alignment="TOP_CENTER" prefHeight="20.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="IV" />
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                         </VBox>
-                        <VBox fx:id="vb_interval_V" alignment="TOP_CENTER" prefHeight="20.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="V" />
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                         </VBox>
-                        <VBox fx:id="vb_interval_VI" alignment="TOP_CENTER" prefHeight="20.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="VI" />
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                         </VBox>
-                        <VBox fx:id="vb_interval_VII" alignment="TOP_CENTER" prefHeight="20.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="VII" />
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hboxChords" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox fx:id="vb_interval_I" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="vb_interval_II" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="vb_interval_III" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="vb_interval_IV" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="vb_interval_V" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="vb_interval_VI" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="vb_interval_VII" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                         </VBox>
                      </children>
                   </HBox>
                </children>
             </VBox>
+            <Separator prefWidth="200.0" />
+            <TitledPane expanded="false" text="NEGATIVE HARMONY">
+               <content>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Label text="INTERVALS:" />
+                              <Label fx:id="lScaleN" />
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="46.0" spacing="5.0">
+                           <children>
+                              <Label text="SCALE:" />
+                              <Label fx:id="lScaleNoteN" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="72.0" spacing="5.0">
+                           <children>
+                              <Label text="CHORD NOTES:" />
+                              <Label fx:id="lScaleChordNotesN" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox fx:id="hboxChords_N_TITLE">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="I" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="II" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="III" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="IV" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="V" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="VI" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="VII" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hboxChords_N" VBox.vgrow="ALWAYS">
+                           <children>
+                              <VBox fx:id="vb_interval_I_N" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="vb_interval_II_N" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="vb_interval_III_N" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="vb_interval_IV_N" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="vb_interval_V_N" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="vb_interval_VI_N" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="vb_interval_VII_N" alignment="TOP_CENTER" prefHeight="20.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <Separator prefWidth="200.0" />
             <ToolBar VBox.vgrow="NEVER">
                <items>
                   <Label text="Status" />

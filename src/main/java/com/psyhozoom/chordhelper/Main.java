@@ -1,5 +1,6 @@
 package com.psyhozoom.chordhelper;
 
+import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +19,7 @@ public class Main extends Application {
     fxmlLoader= new FXMLLoader(ClassLoader.getSystemResource("fxml/ScalesWin.fxml"));
     root = fxmlLoader.load();
     Scene scene =new Scene(root);
+    scene.getStylesheets().add(ClassLoader.getSystemResource("css/Main.css").toExternalForm());
     primaryStage.setScene(scene);
     primaryStage.show();
   }

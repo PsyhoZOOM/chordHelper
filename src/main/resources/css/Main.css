@@ -1,0 +1,101 @@
+.root{
+-fx-background-color: black;
+-fx-foreground-color: white;
+-fx-text-fill: white;
+-fx-fill: white;
+}
+
+VBox{
+-fx-background-color: black;
+    -fx-padding: 8;
+    -fx-border-width: 0.5px;
+    -fx-min-width: 90px;
+    -fx-background-radius: 20px;
+}
+
+.menu-bar{
+  -fx-background-color:black;
+  -fx-foreground-color: white;
+  -fx-text-color: white;
+  -fx-text-fill : white;
+}
+
+
+.tool-bar{
+  -fx-background-color: black
+}
+
+.label{
+  -fx-fill: white;
+}
+
+.text{
+ -fx-fill: white;
+}
+
+.button{
+-fx-background-color: #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 5 10 5 10;
+}
+
+.combo-box{
+-fx-background-color:
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 5 10 5 10;
+}
+
+.list-view{
+  -fx-background-color: black;
+}
+.combo-box-popup .list-view .list-cell
+{
+    -fx-padding: 4 0 4 5;
+
+    /* No alternate highlighting */
+    -fx-background-color: black;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
+{
+    -fx-background: -fx-accent;
+    -fx-background-color: green;
+    -fx-text-fill: black;
+
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: gray;
+    -fx-text-fill: -fx-text-inner-color;
+}
+
+
+.titled-pane{
+  -fx-background-color: black;
+}
+
+.titled-pane .title{
+-fx-background-color: black;
+}
+
+.titled-pane .content{
+-fx-background-color: black;
+}

@@ -13,6 +13,16 @@ public class Scales {
 
  ArrayList<Scales> scalesArrayList = new ArrayList<>();
 
+  public static String reverseScale(String pattern) {
+    System.out.println(pattern);
+    String negPat="";
+    char[] pat = pattern.toCharArray();
+    for (int i=pat.length-1; i >=0;  i--){
+      negPat+=pat[i];
+    }
+
+    return negPat;
+  }
 
 
   public   void initScales(){
