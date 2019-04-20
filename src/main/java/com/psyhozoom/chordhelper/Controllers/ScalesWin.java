@@ -153,27 +153,78 @@ public class ScalesWin implements Initializable {
     }
 
     //negative harmonics
-    String negative_key = Keys.getNegativeKey(Chords.getChordNotesOfScale(key.getKeyName(), selectedScale.getPattern()));
     String negative_patern = Scales.reverseScale(selectedScale.getPattern());
+    String negative_key = Keys.getNegativeKey(Chords.getChordNotesOfScale(key.getKeyName(), negative_patern));
     lScaleN.setText(negative_patern);
 
-    ArrayList<String> chordNotesOfScale = Chords
-        .getChordNotesOfScale(negative_key, negative_patern);
+    ArrayList<ChordsProg> chordNotesOfScale = Scales
+        .getAllChords(negative_key, negative_patern);
+
+    s = chordNotesOfScale.get(0).getNote();
     String notes_Scale_N="";
-    for (String not : chordNotesOfScale){
+    for (String not : s){
       notes_Scale_N+=not+" ";
     }
+
     lScaleNoteN.setText(notes_Scale_N);
 
+    for (int i = 0; i < chordNotesOfScale.size(); i++){
+      ChordsProg chordsProg = chordNotesOfScale.get(i);
+      VBox node = (VBox) hboxChords_N.getChildren().get(i);
+      node.getChildren().add(new Label(chordsProg.getName()));
+      for (int c=0; c<chordsProg.getChords().size(); c++) {
+        Button butChord = new Button();
+        butChord.setText(chordsProg.getNoteNames()+" "+chordsProg.getChords().get(c).getCode());
+        ArrayList<String> notes = chordsProg.getChords().get(c).getNotes();
+
+        butChord.setOnMousePressed(new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent event) {
+            playNotesN(notes);
+          }
+        });
+
+        butChord.setOnMouseReleased(new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent event) {
+            stopNotesN(notes);
+          }
+
+        });
+
+
+        node = (VBox) hboxChords_N.getChildren().get(i);
+        node.getChildren().add(butChord);
+
+      }
+    }
 
 
   }
 
+  private void stopNotesN(ArrayList<String> notes) {
+    oscJava.stopNote(notes);
+  }
+
+  private void playNotesN(ArrayList<String> notes) {
+    System.out.println(String.format("Playing notes: %s", notes));
+    String notePlay = "";
+    for (String note : notes){
+      notePlay+=note+" ";
+    }
+    lScaleChordNotesN.setText(notePlay);
+    oscJava.sendNote(notes);
+  }
 
 
   private void clearVBOXChords() {
     for (int i=0; i< hboxChords.getChildren().size();i++) {
       VBox node = (VBox) hboxChords.getChildren().get(i);
+      node.getChildren().clear();
+    }
+
+    for (int i=0; i< hboxChords_N.getChildren().size();i++){
+      VBox node = (VBox) hboxChords_N.getChildren().get(i);
       node.getChildren().clear();
     }
   }
